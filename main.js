@@ -1,12 +1,12 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
-const userRoutes = require('./routes/user');
+const userRoutes = require('./routes/user.js');
 const {jwtSecret} = require('./config/index.js');
 
 // Middleware
 app.use(bodyParser.json());
-app.use("/user", userRoutes)
+app.use("/v1/user", userRoutes)
 
 const PORT = 3000;
 app.listen(PORT, () => {
