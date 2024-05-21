@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
 const userRoutes = require('./routes/user');
+const {jwtSecret} = require('./config/index.js');
 
 // Middleware
 app.use(bodyParser.json());

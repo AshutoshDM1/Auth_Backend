@@ -2,6 +2,12 @@ const { Router } = require("express");
 const userMiddleware = require("../middleware/user");
 const {User} = require("../db/index.js");
 const router = Router();
+const {jwtSecret} = require("../config");
+const jwt = require("jsonwebtoken");
+
+router.get("/check", async (req, res) => {
+  res.status(200).json({message : "Hi welcome"})
+});
 
 router.post("/signup", async (req, res) => {
   try {
@@ -22,5 +28,34 @@ router.post("/signup", async (req, res) => {
     return res.status(500).json({ message: err.message });
   }
 });
+
+
+router.post("/signin", async (req, res) => {
+  try {
+      const { username , password } = req.body;
+
+    const existingUser = await User.findOne({ username,password });
+    if (existingUser) {
+      const token = jwt.sign({
+          username
+      }, jwtSecret);
+
+      res.json({
+          token
+      })
+  } else {
+      res.status(411).json({
+          message: "Incorrect email and pass"
+      })
+  }
+
+  } catch (err) {
+    return res.status(500).json({ message: err.message });
+  }
+});
+
+router.get("/console", userMiddleware,  async (req,res)=> {
+  res.json({massage: "Hello World"})
+})
 
 module.exports = router;
