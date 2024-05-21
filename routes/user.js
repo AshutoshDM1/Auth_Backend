@@ -4,39 +4,20 @@ const { User } = require("../db/index.js");
 const router = Router();
 const { jwtSecret } = require("../config");
 const jwt = require("jsonwebtoken");
-const bcrypt = require("bcrypt");
+const { hashingPass, checkHashingPass } = require('../utils/bcryptUtils.js');
+const { registerSchema } = require('../schemas/zodSchema');
+const validate = require('../middleware/zodValidate.js');
 
-const saltRounds = 10;
-
-let hashingPass = async (password) => {
-  try {
-    const hash = await bcrypt.hash(password, saltRounds);
-    return hash;
-  } catch (err) {
-    res.status(411).json({ massage: err.err });
-  }
-};
-
-let checkHashingPass = async (enterPassword, hashedPassword) => {
-  try {
-    const match = await bcrypt.compare(enterPassword, hashedPassword);
-    if (match) {
-      return match;
-    } else {
-      return res.status(411).json({ massage: "Passwords does not match!" });
-    }
-  } catch (err) {
-    console.error(err);
-  }
-};
 
 router.get("/check", async (req, res) => {
   res.status(200).json({ message: "Hi welcome" });
 });
 
-router.post("/signup", async (req, res) => {
+router.post("/signup",validate(registerSchema), async (req, res) => {
   try {
     const { username, email, password, gender } = req.body;
+
+
 
     const existingUser = await User.findOne({ username });
     if (existingUser) {
