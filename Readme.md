@@ -1,3 +1,3 @@
-## Bankend Project Using Node.js , Express , ZOD , JWT , MongoDB 
+## Bankend Project Using Node.js , Express , ZOD , JWT , Bcrypt , MongoDB 
 
 ## Work in Progress .....
