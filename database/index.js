@@ -12,6 +12,20 @@ const UserSchema = new mongoose.Schema({
   gender: { type: String },
 });
 
+const PostsSchema = new mongoose.Schema({
+  username: {
+    type: String, required: true 
+  },
+  title : {
+    type  : String, required: true
+  },
+  message : {
+    type    : String, required: true
+  }
+
+});
+
 
 const User = mongoose.model("User", UserSchema);
-module.exports = {User};
+const Post = mongoose.model("Post", PostsSchema);
+module.exports = {User , Post};

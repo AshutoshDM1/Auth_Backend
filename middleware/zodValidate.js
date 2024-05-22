@@ -1,4 +1,4 @@
-const validate = (registerSchema) => (req, res, next) => {
+const zodValidate = (registerSchema) => (req, res, next) => {
   console.log("Validating")
   try {
     const validate = registerSchema.safeParse(req.body);
@@ -11,4 +11,4 @@ const validate = (registerSchema) => (req, res, next) => {
   }
 };
 
-module.exports = validate;
+module.exports = zodValidate;

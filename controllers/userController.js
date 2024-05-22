@@ -1,11 +1,15 @@
-const { User } = require("../db/index.js");
+const { User } = require("../database/index.js");
 const { jwtSecret } = require("../config/index.js");
 const jwt = require("jsonwebtoken");
-const { hashingPass, checkHashingPass } = require('../utils/bcryptUtils.js');
+const { hashingPass, checkHashingPass } = require("../utils/bcryptUtils.js");
 
-
-const check = async (req, res) => {
-  res.status(200).json({ message: "Hi welcome" });
+const users = async (req, res) => {
+  try {
+    const users = await User.find({});
+    res.status(200).json(users);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
 };
 
 const signup = async (req, res) => {
@@ -59,9 +63,24 @@ const login = async (req, res) => {
   }
 };
 
-const console =  async (req, res) => {
+const signout = async (req, res) => {
+  const { username, password } = req.body;
+  const existingUser = await User.findOne({ username });
+  if (existingUser) {
+    const match = await checkHashingPass(password, existingUser.password);
+    if (match === true) {
+      try {
+        await User.findOneAndDelete({ username });
+        res.status(200).json({ message: "User SignOut Successful" });
+      } catch (err) {
+        return res.status(500).json({ message: err.message });
+      }
+    }
+  }
+};
+
+const posts = async (req, res) => {
   res.json({ massage: "Hello World" });
 };
 
-
-module.exports = {check ,signup ,login ,console };
+module.exports = { users, signup, login, signout, posts };
