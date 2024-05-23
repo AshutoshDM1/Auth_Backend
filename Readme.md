@@ -11,12 +11,16 @@
 | JsonWebToken | To Generate Token and Validate Token  |
 | MongoDB  | To Store Data in Database  |
 | Mongooes | To Create Schema  |
-| Vercel | Vercel  | To Deploy Project in Vercel  |
+| Vercel | Deploy Project in Vercel  |
 
 ### All Data You get or post on Routes should be in JSON 
 
+## Auth Backend User Interaction Map
+
+![Auth Backend Map](https://i.postimg.cc/Hp9hSRKv/auth-backend-map.png)
+
 ## User Routes 
-###Here you can signup , login , signout , and 
+### Here you can signup , login , signout , and 
 
 | Route Name | Request Type | URL | Need | Get |
 | -------- | -------- | -------- | --------- | -------- |
@@ -39,5 +43,28 @@
 | /v1/user/chat/post/(id) | Put | [https://auth-backend-dm.vercel.app/v1/user/chat/post/:id](https://auth-backend-dm.vercel.app/v1/user/chat/post/:id) | JWT token , postId , new title and msg | Success Message , NewPost |
 | /v1/user/chat/post/(id) | delete | [https://auth-backend-dm.vercel.app/v1/user/chat/post/:id](https://auth-backend-dm.vercel.app/v1/user/chat/post/:id) | JWT token , postId | Succes Msg |
 | /v1/user/chat/deleteAllPosts | delete | [https://auth-backend-dm.vercel.app/v1/user/chat/deleteAllPosts](https://auth-backend-dm.vercel.app/v1/user/chat/deleteAllPosts) | JWT token | Succes Msg |
+
+
+## Auth Backend Working map
+
+![Auth Backend Working Map](https://i.postimg.cc/mgXFkbk6/auth-backend-working-map.png)
+
+
+## Key Features
+
+### User Authentication:
+User signup and login functionality.
+Password hashing and verification using bcrypt.
+JWT (JSON Web Token) based authentication.
+### User Management:
+Routes for creating, reading, updating, and deleting user data.
+Middleware for user validation and authentication.
+### Security:
+HTTPS support for secure communication.
+Environment configuration for managing sensitive information like JWT secret keys.
+### Database Integration:
+MongoDB for data storage.
+Mongoose for schema definition and data validation.
+
 
 

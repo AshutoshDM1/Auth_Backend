@@ -13,9 +13,9 @@ const {
   deletePostById,
 } = require("../controllers/postsController.js");
 
-router.post("/post", userValidate ,zodValidate(PostSchema), createPost);
-
 router.get("/post", userValidate , getPosts);
+
+router.post("/post", userValidate ,zodValidate(PostSchema), createPost);
 
 router.delete("/deleteAllPosts", userValidate , deleteAllPosts);
 

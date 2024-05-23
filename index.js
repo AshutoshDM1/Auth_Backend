@@ -3,14 +3,16 @@ const bodyParser = require('body-parser');
 const app = express();
 const userRoutes = require('./routes/userRoutes.js');
 const postsRoutes = require('./routes/postsRoutes.js');
-const {jwtSecret} = require('./config/index.js');
+const { rootdata } = require('./init/rootData.js')
 
 // Middleware
 app.use(bodyParser.json());
 app.use("/v1/user", userRoutes)
 app.use("/v1/user/chat", postsRoutes)
 
-app.get('/', (req, res) => {res.send('Hello World')});
+app.get('/', (req, res) => {
+    res.status(200).json(rootdata);
+});
 
 const PORT = 3000;
 app.listen(PORT, () => {
