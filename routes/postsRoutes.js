@@ -15,7 +15,7 @@ const {
 
 router.get("/post", userValidate , getPosts);
 
-router.post("/post", userValidate ,zodValidate(PostSchema), createPost);
+router.post("/post", userValidate , createPost);
 
 router.delete("/deleteAllPosts", userValidate , deleteAllPosts);
 
