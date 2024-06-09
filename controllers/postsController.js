@@ -10,9 +10,9 @@ const getPosts = async (req, res) => {
 };
 
 const createPost = async (req, res) => {
-  const { username, title, message } = req.body;
+  const { username,  message } = req.body;
   try {
-    const post = await Post.create({ username, title, message });
+    const post = await Post.create({ username,  message });
     console.log(post);
     res.status(200).json({
       message: "post created successfully",
@@ -44,14 +44,13 @@ const getPostById = async (req, res) => {
 
 const updatePost = async (req, res) => {
   let { id } = req.params;
-  let { message , title } = req.body;
+  let { message } = req.body;
   try {
     const post = await Post.findByIdAndUpdate(
       id,
       {
         $set: {
           message: message,
-          title: title,
         },
       },
       { runValidators: true, new: true }

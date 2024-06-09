@@ -14,7 +14,6 @@ const deleteUserSchema = z.object({
 
 const PostSchema = z.object({
   username: z.string().min(3).max(20),
-  title : z.string().min(5).max(30),
   message : z.string().min(10).max(100),
 })
 
