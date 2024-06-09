@@ -16,13 +16,9 @@ const PostsSchema = new mongoose.Schema({
   username: {
     type: String, required: true 
   },
-  title : {
-    type  : String, required: true
-  },
   message : {
     type    : String, required: true
   }
-
 });
 
 
